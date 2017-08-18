@@ -61,7 +61,7 @@ const mapStateToProps = (state) => {
         activities: state.chooseDestinationReducer.activities,
         map: state.mapReducer.map,
         showInfo: state.mapReducer.showInfo,
-        centerOfMap: state.chooseDestinationReducer.centerOfMap
+        centerOfMap: state.chooseDestinationReducer.centerOfMap,
     }
 };
 

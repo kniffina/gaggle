@@ -18,8 +18,7 @@ const mapReducer = (state = {
             else {
                 if (action.payload !== null) {
                     return Object.assign({}, state, {
-                        map: action.payload,
-                        activities: state.activities
+                        map: action.payload
                     });
                 }
             }
@@ -50,13 +49,9 @@ const mapReducer = (state = {
             action.payload.marker.showInfo = !action.payload.marker.showInfo;
 
             return Object.assign({}, state, {
-               activities: Object.assign({}, state, {
-                   marker: Object.assign({}, state, {
-                       showInfo: !state.showInfo
-                   })
-               })
+                showInfo: !state.showInfo
             });
-
+            break;
 
         case "ON_MARKER_CLOSE":
             action.payload.marker.showInfo = false;
@@ -64,7 +59,6 @@ const mapReducer = (state = {
             return Object.assign({}, state, {
                 showInfo: false
             });
-
 
         case "RESET_ALL_STATE":
             return Object.assign({}, state, {
@@ -75,10 +69,9 @@ const mapReducer = (state = {
             });
 
         case "SET_ACTIVITIES":
-            console.log("********************\n****************\n");
+            console.log("********************\n");
             return Object.assign({}, state, {
                 activities: action.payload.activities,
-
             });
     }
     return state;

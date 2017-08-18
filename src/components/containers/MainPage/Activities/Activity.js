@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {connect} from 'react-redux';
 import { Link, browserHistory } from "react-router";
+import Navbar from "../../../containers/Navbar/Navbar";
 
 require("../../../../../public/stylesheets/style.css");
 
@@ -30,10 +31,24 @@ class Activity extends Component {
     render() {
 
         return (
-            <div>
-                <h1>{this.state.activity.body}</h1>
 
-                <button onClick={this.backToMain} className="btn btn-default">Back</button>
+            <div className="container">
+                <Navbar />
+
+                <div className="row">
+                    <div className="panel panel-heading margin_top col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+                        <h1 className="panel panel-heading">{this.state.activity.title}</h1>
+                        <br />
+
+                        <h4>{this.state.activity.body}</h4>
+                        <br />
+
+                        <h4>{this.state.activity.date}</h4>
+                        <br />
+
+                        <button onClick={this.backToMain} className="panel panel-default btn btn-default">Back</button>
+                    </div>
+                </div>
             </div>
         );
     }

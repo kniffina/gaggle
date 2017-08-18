@@ -115,7 +115,6 @@ const mapStateToProps = (state) => {
         date: state.chooseDestinationReducer.date,
         location: state.chooseDestinationReducer.location,
         errors: state.chooseDestinationReducer.errors,
-        centerOfMap: state.centerOfMap,
         sendToMain: state.chooseDestinationReducer.sendToMain,
         pushBrowser: state.chooseDestinationReducer.pushBrowser,
         centerOfMap: state.chooseDestinationReducer.centerOfMap
