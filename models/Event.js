@@ -17,7 +17,8 @@ var EventSchema = new mongoose.Schema({
         default: []
     },
     title: {
-        type: String
+        type: String,
+        default: "Title"
     },
     body: {
         type: String,
@@ -33,7 +34,7 @@ var EventSchema = new mongoose.Schema({
         default: new Date()
     },
     date: {
-        type: Date,
+        type: String,
         default: ''
     },
     location: {}
@@ -50,7 +51,8 @@ EventSchema.methods.summary = function() {
         img: this.img,
         timestamp: this.timestamp,
         date: this.date,
-        location: this.location
+        location: this.location,
+        title: this.title
     };
     return summary;
 };

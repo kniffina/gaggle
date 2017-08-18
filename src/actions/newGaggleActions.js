@@ -26,5 +26,13 @@ export function handleDate(date) {
     }
 }
 
+export function resetAllState() {
+    return {
+        type: "RESET_ALL_STATE",
+        payload: null
+    }
+
+}
+
 
 

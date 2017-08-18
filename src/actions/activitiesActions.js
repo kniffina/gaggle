@@ -20,16 +20,19 @@ export function openActivity(activity) {
     }
 }
 
-export function setLocation(location) {
+
+
+export function setMarkersActivities(props) {
     return {
-        type: "SET_LOCATION",
-        payload: location
+        type: "SET_MARKERS",
+        payload: props
     }
 }
 
-export function setActivityListVars(params) {
+export function resetAllState() {
     return {
-        type: "SET_ACTIVITY_VARS",
-        payload: params
+        type: "RESET_ALL_STATE",
+        payload: null
     }
+
 }

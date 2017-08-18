@@ -6,7 +6,9 @@ import { store, dispatch } from "react-redux";
 const mapReducer = (state = {
     map: null,
     showInfo: false,
-    activities: []
+    activities: [],
+    centerOfMap: {},
+
 }, action) => {
     switch (action.type) {
         case "MAP_LOADED":
@@ -16,7 +18,8 @@ const mapReducer = (state = {
             else {
                 if (action.payload !== null) {
                     return Object.assign({}, state, {
-                        map: action.payload
+                        map: action.payload,
+                        activities: state.activities
                     });
                 }
             }
@@ -43,10 +46,11 @@ const mapReducer = (state = {
             break;
 
         case "ON_MARKER_CLICK":
+            console.log(action.payload);
             action.payload.marker.showInfo = !action.payload.marker.showInfo;
 
             return Object.assign({}, state, {
-               mapActivites: Object.assign({}, state, {
+               activities: Object.assign({}, state, {
                    marker: Object.assign({}, state, {
                        showInfo: !state.showInfo
                    })
@@ -62,10 +66,19 @@ const mapReducer = (state = {
             });
 
 
+        case "RESET_ALL_STATE":
+            return Object.assign({}, state, {
+                map: null,
+                showInfo: false,
+                activities: [],
+                centerOfMap: {},
+            });
 
         case "SET_ACTIVITIES":
+            console.log("********************\n****************\n");
             return Object.assign({}, state, {
-               mapActivities: action.payload
+                activities: action.payload.activities,
+
             });
     }
     return state;

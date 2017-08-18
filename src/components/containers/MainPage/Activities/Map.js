@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { InfoWindow, withGoogleMap,GoogleMap, Marker } from "react-google-maps";
 import {browserHistory} from "react-router";
-import { mapLoaded, mapMoved, openActivity, onMarkerClick, onMarkerClose, zoomChanged, setActivities } from "../../../../actions/mapActions";
+import { mapLoaded, mapMoved, openActivity, onMarkerClick, onMarkerClose, zoomChanged, setStateMap } from "../../../../actions/mapActions";
 import { connect } from 'react-redux';
 
 class Map extends Component {
@@ -9,6 +9,7 @@ class Map extends Component {
     componentWillMount() {
 
         console.log(this.props);
+        this.props.setStateMap(this.props);
     }
 
     render() {
@@ -22,12 +23,12 @@ class Map extends Component {
                     onZoomChanged={() => this.props.zoomChanged(this.props.map)}
                     onDragEnd={() => this.props.mapMoved(this.props.map)}
                     defaultZoom={this.props.zoom}
-                    defaultCenter={this.props.center}
+                    defaultCenter={this.props.centerOfMap}
                 >
                     {this.props.activities.map((activity, index) => (
                             <Marker
                                 {...activity.marker}
-                                key={activity.id}
+                                key={activity.marker.id}
                                 onClick={() => this.props.onMarkerClick(activity)}
                             >
                                 { activity.marker.showInfo ?
@@ -38,7 +39,8 @@ class Map extends Component {
                                             <a onClick={() => this.props.openActivity(activity)} href="#">
                                                 <h5>{activity.title}</h5>
                                             </a>
-                                            <p>{activity.description}</p>
+                                            <p>{activity.body}</p>
+                                            <p>{activity.date}</p>
 
                                         </div>
                                     </InfoWindow> : null }
@@ -51,12 +53,15 @@ class Map extends Component {
         }
     }
 }
-//<p>{activity.hour_start} - {activity.hour_end} on {activity.date_happening}</p>
+
+//{lat: -123.0350963, lng: 44.9428975}
+
 const mapStateToProps = (state) => {
     return {
         activities: state.chooseDestinationReducer.activities,
         map: state.mapReducer.map,
-        showInfo: state.mapReducer.showInfo
+        showInfo: state.mapReducer.showInfo,
+        centerOfMap: state.chooseDestinationReducer.centerOfMap
     }
 };
 
@@ -68,7 +73,7 @@ const mapDispatchToProps = (dispatch) => {
         onMarkerClick: (activity) => dispatch(onMarkerClick(activity)),
         onMarkerClose: (activity) => dispatch(onMarkerClose(activity)),
         zoomChanged: (map) => dispatch(zoomChanged(map)),
-        setActivities: (activities) => dispatch(setActivities(activities))
+        setStateMap: (props) => dispatch(setStateMap(props))
     }
 };
 

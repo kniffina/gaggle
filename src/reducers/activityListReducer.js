@@ -6,7 +6,8 @@ const activityListReducer = (state = {
     showMap: true,
     location: "",
     centerOfMap: {},
-    activities: []
+    activities: [],
+    markers: []
 }, action) => {
     switch(action.type) {
         case "TOGGLE_MAP":
@@ -21,15 +22,32 @@ const activityListReducer = (state = {
             });
             break;
 
-        case "SET_LOCATION":
+        case "SET_MARKERS":
+            let setMarkers = [];
+            for(let i = 0; i < action.payload.activities.length; i++) {
+                setMarkers[i] = {};
+                setMarkers[i] = action.payload.activities[i].marker;
+            }
+
             return Object.assign({}, state, {
-               location: action.payload
+                markers: setMarkers,
+                activities: action.payload.activities,
+                centerOfMap: action.payload.centerOfMap,
+                location: action.payload.location
             });
 
-        case "SET_ACTIVITY_VARS":
+        case "RESET_ALL_STATE":
             return Object.assign({}, state, {
-                activities: action.payload.activities
+                showMap: true,
+                location: "",
+                centerOfMap: {},
+                activities: [],
+                markers: []
             });
+
+
+            break;
+
     }
     return state;
 

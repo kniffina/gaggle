@@ -6,12 +6,20 @@ import DatePicker from "react-datepicker";
 var vars = require('../../../utils/vars.js');
 import "react-datepicker/dist/react-datepicker.css";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng, geocodeByPlaceId } from 'react-places-autocomplete';
-import { resetBrowser, setLocation, handleDate, getActivities, sendToNewGaggle, checkDestinationErrors, onChange } from "../../../actions/chooseDestinationActions";
+import { resetAllState, setCenterPoint, resetBrowser, setLocation, handleDate, getActivities, sendToNewGaggle, checkDestinationErrors, onChange } from "../../../actions/chooseDestinationActions";
 require("../../../../public/stylesheets/style.css");
 
 class ChooseDestination extends Component {
+
+    componentDidMount() {
+        console.log("IN COMPONENT DID MOUNT CHOOSE DESTINATION", this.props);
+        if(this.props !== null || this.props !== undefined) {
+            this.props.resetAllState();
+        }
+    }
     componentWillUpdate(nextProps) {
         if(nextProps.sendToMain === true && nextProps.pushBrowser === false) {
+
             this.props.getActivities(nextProps.location);
         }
 
@@ -110,7 +118,7 @@ const mapStateToProps = (state) => {
         centerOfMap: state.centerOfMap,
         sendToMain: state.chooseDestinationReducer.sendToMain,
         pushBrowser: state.chooseDestinationReducer.pushBrowser,
-
+        centerOfMap: state.chooseDestinationReducer.centerOfMap
     };
 };
 
@@ -122,8 +130,9 @@ const mapDispatchToProps = (dispatch) => {
         onChange: (event) => dispatch(onChange(event)),
         sendToNewGaggle: () => dispatch(sendToNewGaggle()),
         getActivities: (location) => dispatch(getActivities(location)),
-        resetBrowser: () => dispatch(resetBrowser())
-
+        resetBrowser: () => dispatch(resetBrowser()),
+        setCenterPoint: (location) => dispatch(setCenterPoint(location)),
+        resetAllState: () => dispatch(resetAllState())
     }
 };
 

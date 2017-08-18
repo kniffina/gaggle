@@ -115,8 +115,7 @@ const mapStateToProps = (state) => {
         date: state.createGaggle.date,
         location: state.createGaggle.location,
         imageLink: state.createGaggle.imageLink,
-        errors: state.createGaggle.errors
-
+        errors: state.createGaggle.errors,
     }
 };
 

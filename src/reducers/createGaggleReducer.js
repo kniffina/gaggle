@@ -13,7 +13,6 @@ const createGaggleReducer = (state = {
     location: "",
     imageLink: "",
     errors: {},
-
 }, action) => {
     switch (action.type) {
 
@@ -70,6 +69,8 @@ const createGaggleReducer = (state = {
             else {
                 let url = `${DOMAIN}/api/event`;
                 let params = new URLSearchParams();
+
+                params.append("destination", state.location);
                 params.append("author", state.author);
                 params.append("isPrivate", state.isPrivate);
                 params.append("members", state.members);
@@ -77,7 +78,9 @@ const createGaggleReducer = (state = {
                 params.append("body", state.body);
                 params.append("img", state.imageLink);
                 params.append("date", state.date);
-                params.append("destination", state.location);
+
+                console.log(state);
+                console.log(params);
 
                 axios.post(url, params)
                     .then(function(response) {
@@ -90,6 +93,19 @@ const createGaggleReducer = (state = {
                         return state;
                     });
             }
+            return Object.assign({}, state, {
+                author: "",
+                members: [],
+                title: "",
+                body: "",
+                img: "",
+                date: "",
+                location: "",
+                imageLink: "",
+                errors: {},
+            });
+
+        case "RESET_ALL_STATE":
             return Object.assign({}, state, {
                 author: "",
                 members: [],

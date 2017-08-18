@@ -8,7 +8,6 @@ import Chat from "../containers/MainPage/Chat";
 import NewGaggle from "../containers/MainPage/NewGaggle/NewGaggle";
 
 class MainPage extends Component {
-
     render() {
         return(
             <div className="container">
@@ -18,7 +17,7 @@ class MainPage extends Component {
                 <div className="row">
                     <div className="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-12">
                         <Tabs
-                            selected={this.props.tab}
+                            selected={this.props.location.state.tab}
                             tabs={[
                                 {
                                     children: () => (
@@ -50,8 +49,7 @@ class MainPage extends Component {
 
 const mapStateToProps =(state) => {
     return {
-        tab: state.tab,
-        activities: state.activities
+        activities: state.activities,
     }
 };
 

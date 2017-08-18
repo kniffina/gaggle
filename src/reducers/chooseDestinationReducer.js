@@ -15,7 +15,6 @@ const chooseDestinationReducer = (state = {
     centerOfMap: {},
     sendToMain: false,
     pushBrowser: false,
-    tab: 0
 }, action) => {
     switch (action.type) {
         case "CHECK_DESTINATION_ERRORS":
@@ -49,53 +48,84 @@ const chooseDestinationReducer = (state = {
             }
             break;
 
-        case "SET_ACTIVITIES":
-            var newActivities = [];
+        case "SET_ACTIVITIES_CHOOSE_DESTINATION":
+            let newActivities = [];
+            let counter = 0;
+            let centerOnFirst = 0;
+            let center = {};
 
-            for(var i = 0; i < action.payload.length; i++) {
-                newActivities[i] = {};
-                newActivities[i] = action.payload[i];
-                if(action.payload[i].location === undefined) {
-                    newActivities[i] = action.payload[i];
+            for(let i = 0; i < action.payload.length; i++) {
+                if (action.payload[i].location === undefined) {
+                    if(counter === 0) {
+                        counter = 0;
+                    }
+                    else {
+                        counter = newActivities.length;
+                    }
                 }
                 else {
-                    newActivities[i].marker = {
-                        id: i,
+                    if (centerOnFirst === 0) {
+                        center = {
+                            lat: action.payload[i].location.loc[1],
+                            lng: action.payload[i].location.loc[0]
+                        };
+                        centerOnFirst++;
+                    }
+
+                    newActivities[counter] = {};
+                    newActivities[counter] = action.payload[i];
+                    newActivities[counter].marker = {
+                        id: counter,
                         position: {
-                            lat: action.payload[i].location.loc[0],
-                            lng: action.payload[i].location.loc[1],
+                            lat: action.payload[i].location.loc[1],
+                            lng: action.payload[i].location.loc[0],
                         },
                         title: action.payload[i].body,
                         showInfo: false
                     };
+                    counter++;
                 }
             }
-            console.log("** AFTER SETTING NEW ACTIVITIES", newActivities);
-            return Object.assign({}, state, {
-                activities: newActivities,
-                errors: {},
-                pushBrowser: true
-            });
+            console.log("*** new activities ***", newActivities);
+            //if no activities just reset state
+            if(newActivities.length <= 0) {
+                alert("No activities found for that location");
+                return Object.assign({}, state, {
+                    date: "",
+                    location: "",
+                    errors: {},
+                    activities: [],
+                    centerOfMap: {},
+                    sendToMain: false,
+                    pushBrowser: false,
+                });
+            }
+            else {
+                console.log("** AFTER SETTING NEW ACTIVITIES", newActivities);
+                return Object.assign({}, state, {
+                    activities: newActivities,
+                    errors: {},
+                    pushBrowser: true,
+                    centerOfMap: center
+                });
+            }
 
-            break;
 
         case "RESET_BROWSER":
-            console.log("RESET", state.activities);
-
             browserHistory.push({
                 pathname: "/main-page",
-                // state: {
-                //     tab: 0,
-                //     activities: "fuck you"
-                // }
-
+                state: {
+                    tab: 0
+                }
             });
             return Object.assign({
                 pushBrowser: false,
                 sendToMain: false,
                 errors: {},
                 activities: state.activities,
-                tab: 0
+                tab: 0,
+                centerOfMap: state.centerOfMap,
+                location: state.location
             });
 
         case "FIND_LOCATION":
@@ -120,13 +150,25 @@ const chooseDestinationReducer = (state = {
 
         case "SEND_TO_NEW_GAGGLE":
             browserHistory.push({
-                pathname: '/main-page',
+                pathname: "/main-page",
                 state: {
                     tab: 1
                 }
             });
 
             break;
+
+        case "RESET_ALL_STATE":
+            return Object.assign({}, state, {
+                date: "",
+                location: "",
+                errors: {},
+                activities: [],
+                centerOfMap: {},
+                sendToMain: false,
+                pushBrowser: false,
+                tab: 0,
+            });
     }
 
     return state;

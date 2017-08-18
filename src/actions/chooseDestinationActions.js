@@ -1,10 +1,11 @@
-var axios = require('axios')
-var vars = require('../utils/vars.js');
-var DOMAIN = vars.DOMAIN;
+let axios = require('axios')
+let vars = require('../utils/vars.js');
+let DOMAIN = vars.DOMAIN;
 
 export function getActivities(location) {
     let url = `${DOMAIN}/api/event`;
 
+    console.log(location);
     return function(dispatch) {
         //dispatch(getData(location))
 
@@ -16,9 +17,10 @@ export function getActivities(location) {
     }
 }
 
+
 export function setStateVariables(data) {
     return {
-        type: "SET_ACTIVITIES",
+        type: "SET_ACTIVITIES_CHOOSE_DESTINATION",
         payload: data.data.results
     }
 }
@@ -63,5 +65,13 @@ export function sendToNewGaggle() {
         type: "SEND_TO_NEW_GAGGLE",
         payload: null
     }
+}
+
+export function resetAllState() {
+    return {
+        type: "RESET_ALL_STATE",
+        payload: null
+    }
+
 }
 

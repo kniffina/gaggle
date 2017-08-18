@@ -9,6 +9,6 @@ exports.USER_EMAIL = '';
 exports.LOCATION = '';
 
 exports.LatLong = {
-	lat: '',
-	lng: ''
+    lat: '',
+    lng: ''
 }

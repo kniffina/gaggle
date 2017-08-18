@@ -40,9 +40,17 @@ export function zoomChanged(map) {
     }
 }
 
-export function setActivities(activities) {
+export function setStateMap(activities) {
     return {
         type: "SET_ACTIVITIES",
         payload: activities
     }
+}
+
+export function resetAllState() {
+    return {
+        type: "RESET_ALL_STATE",
+        payload: null
+    }
+
 }

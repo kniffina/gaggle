@@ -14,6 +14,7 @@ class Activity extends Component {
             activity: this.props.location.state.activity
         }
         this.backToMain = this.backToMain.bind(this);
+        console.log(this.state);
     }
 
     backToMain() {
@@ -30,7 +31,7 @@ class Activity extends Component {
 
         return (
             <div>
-                <h1>{this.state.activity.title}</h1>
+                <h1>{this.state.activity.body}</h1>
 
                 <button onClick={this.backToMain} className="btn btn-default">Back</button>
             </div>

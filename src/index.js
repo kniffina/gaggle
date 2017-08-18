@@ -30,6 +30,7 @@ const store = createStore(
     applyMiddleware(thunkMiddleWare, logger)
 );
 
+
 const app = (
     <Provider store={store}>
         <Router history={browserHistory} routes={routes} />
