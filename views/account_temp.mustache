@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <!-- <link rel='stylesheet' href='/stylesheets/style.css' /> -->
+  </head>
+  <body>
+      <h1> Current User: {{user.username}} </h1>
+      <a href="/account/logout">Logout</a>
+      <br />
+      <br />
+      <form action="/api/post" method="post">
+        <input type="radio" name="isPrivate" value="false" checked> Public <br />
+        <input type="radio" name="isPrivate" value="true"> Private <br />
+        <textarea name="author" placeholder="author"></textarea><br />
+        <textarea name="body" placeholder="Comment Goes Here"></textarea><br />
+        <textarea name="img" placeholder="http://www.imgr.com/path/to/img.jpg"></textarea><br />
+        <textarea name="members" placeholder="username1, username2"></textarea><br />
+        Location Name: <textarea name="locationName" placeholder="Los Angeles, CA"></textarea><br />
+        Long: <textarea name="long"></textarea><br />
+        Lat: <textarea name="lat"></textarea><br />
+        <input type="submit" value="Submit Post" />
+      </form>
+
+      <br />
+      <h1> Login</h1>
+      <form action="/account/login" method="post">
+        Username: <input type="text" name="username" placeholder="your username"></input><br />
+        Password: <input type="password" name="password">
+        <br />
+        <input type="submit" value="Login" />
+      </form>
+
+
+      <h3> User Comments </h3>
+      <ol>
+      {{#comments}}
+        <li>Time: {{timestamp}} : Body: {{body}}</li>
+      {{/comments}}
+      </ol>
+  </body>
+</html>

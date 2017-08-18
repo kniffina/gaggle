@@ -1,0 +1,97 @@
+
+.vertical_align {
+    margin-top: 8%;
+}
+
+.small_vertical_align {
+    margin-top: 4%;
+}
+
+#loginNormalButton {
+    margin-left: 8px;
+}
+
+.text_align_center_class {
+    text-align: center;
+}
+
+.navbar_padding {
+    padding: 10px;
+}
+
+#navbar_gaggle_text {
+    font-family: "Verdana,sans-serif";
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.navbar_button {
+    padding: 2px 10px 2px 10px;
+    font-size: 14px;
+}
+
+#navbar_button_margin_left {
+    margin-left: 4px;
+}
+
+.calendar_addon {
+    width: 15px;
+}
+
+.calendar:hover {
+    cursor: pointer;
+}
+
+.register_button_padding_bottom {
+    padding-bottom: 30px;
+}
+
+.control-label {
+    padding: 0;
+    vertical-align: middle;
+}
+
+.errorField {
+    color: red;
+    font-weight: bold;
+    padding: 0;
+    margin-bottom: -10px;
+}
+
+.totalErrors {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.landingTotalErrors {
+    color: red;
+    margin-top: 20px;
+    font-weight: bold;
+    margin-bottom: -5px;
+    text-align: center;
+}
+
+.activitiesMarginTop {
+    margin-top: 25px;
+}
+
+.button_margin_bottom {
+    margin-bottom: 10px;
+}
+
+.new_gaggle_button {
+    margin-left: 10px;
+}
+
+.date_picker {
+    width: 25em;
+}
+
+.center_image {
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+}
+
+
